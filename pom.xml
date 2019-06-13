@@ -53,6 +53,14 @@
             <version>2.3.28</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/com.hynnet/jacob -->
+        <dependency>
+            <groupId>com.hynnet</groupId>
+            <artifactId>jacob</artifactId>
+            <version>1.18</version>
+        </dependency>
+
+
     </dependencies>
 
     <build>

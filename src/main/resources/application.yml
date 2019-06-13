@@ -2,4 +2,4 @@ server:
   port: 9629
 
 template:
-  path: /templates/template.xml
+  path: /templates/document.xml
