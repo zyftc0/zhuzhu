@@ -5,10 +5,10 @@ import lombok.experimental.Accessors;
 
 @Data
 @Accessors(chain = true)
-public class Compensation {
+public class Remark {
 
     private Long id;
 
-    private String compensation;
+    private String remark;
 
 }

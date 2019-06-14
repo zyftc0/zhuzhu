@@ -7,6 +7,8 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class Title {
 
+    private Long id;
+
     private String post;
 
     private String postLocation;
