@@ -4,6 +4,11 @@ import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import freemarker.template.Version;
+import org.dom4j.Document;
+import org.dom4j.DocumentException;
+import org.dom4j.Element;
+import org.dom4j.Node;
+import org.dom4j.io.SAXReader;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ResourceUtils;
@@ -23,7 +28,7 @@ public class ConventorServiceImpl implements ConventorService {
     @Value("${template.path}")
     private String templatePath;
 
-    public static void main(String[] args) throws IOException, TemplateException {
+    public static void main(String[] args) throws IOException, TemplateException, DocumentException {
         HashMap<String, Object> total = new HashMap<>();
         {
             Title title = new Title()
@@ -48,7 +53,7 @@ public class ConventorServiceImpl implements ConventorService {
             EducationBackground e2 = new EducationBackground()
                     .setStartEduDate("2019.01")
                     .setEndEduDate("2019.06")
-                    .setSchool("东北林业大学2")
+                    .setSchool("东北打麻将大学2")
                     .setMajor("软件a 程")
                     .setEducation("学 3 士");
             educationBackgrounds.add(e1);
@@ -108,16 +113,37 @@ public class ConventorServiceImpl implements ConventorService {
 
         // 目标文件存放路径
 //        String outDirPath = "/Users/ifzhang/Downloads/";  // mac
-        String outDirPath = "D:/";  // windows
+        String outDirPath = "C:/Users/50689/Desktop/IO/";  // windows
         String tmpXmlName = "temp.xml";
         String finalDocxName = "final.docx";
 
+//        {
+//            // 分析对象，并生成对应模板
+//            // 创建SAXReader的对象reader
+//            SAXReader reader = new SAXReader();
+//
+//            // 通过reader对象的read方法加载xml文件,获取docuemnt对象。
+//            Document document = reader.read(ResourceUtils.getFile(templateFilePath + templateXmlName));
+//
+//            // 通过document对象获取根节点
+//            Element wdocument = document.getRootElement();
+//
+//            Element wbody = wdocument.element("body");
+//
+//            List<Element> wps = wbody.elements();
+//
+//            wps.forEach(wp ->
+//                System.out.println(wp.attributeValue("paraId"))
+//            );
+//        }
+
         {
-            File templateXmlPath = ResourceUtils.getFile(templateFilePath);
+            // xml路径
+            File templatePath = ResourceUtils.getFile(templateFilePath);
             Configuration configuration = new Configuration(new Version("2.3.0"));
             configuration.setDefaultEncoding("UTF-8");
             // 加载模板数据（从文件路径中获取文件，其他方式，可百度查找）
-            configuration.setDirectoryForTemplateLoading(templateXmlPath);
+            configuration.setDirectoryForTemplateLoading(templatePath);
             // 获取模板实例
             Template template = configuration.getTemplate(templateXmlName);
             template.setOutputEncoding("UTF-8");
@@ -130,32 +156,34 @@ public class ConventorServiceImpl implements ConventorService {
             out.close();
         }
 
-        File file = new File(outDirPath + tmpXmlName);
-        File docxFile = ResourceUtils.getFile(templateFilePath + templateDocxName);
-        ZipFile zipFile = new ZipFile(docxFile);
-        Enumeration<? extends ZipEntry> zipEntrys = zipFile.entries();
-        ZipOutputStream zipout = new ZipOutputStream(new FileOutputStream(outDirPath + finalDocxName));
-        int len;
-        byte[] buffer = new byte[1024];
-        while (zipEntrys.hasMoreElements()) {
-            ZipEntry next = zipEntrys.nextElement();
-            InputStream is = zipFile.getInputStream(next);
-            // 把输入流的文件传到输出流中 如果是word/document.xml由我们输入
-            zipout.putNextEntry(new ZipEntry(next.toString()));
-            if ("word/document.xml".equals(next.toString())) {
-                InputStream in = new FileInputStream(file);
-                while ((len = in.read(buffer)) != -1) {
-                    zipout.write(buffer, 0, len);
+        {
+            File file = new File(outDirPath + tmpXmlName);
+            File docxFile = ResourceUtils.getFile(templateFilePath + templateDocxName);
+            ZipFile zipFile = new ZipFile(docxFile);
+            Enumeration<? extends ZipEntry> zipEntrys = zipFile.entries();
+            ZipOutputStream zipout = new ZipOutputStream(new FileOutputStream(outDirPath + finalDocxName));
+            int len;
+            byte[] buffer = new byte[1024];
+            while (zipEntrys.hasMoreElements()) {
+                ZipEntry next = zipEntrys.nextElement();
+                InputStream is = zipFile.getInputStream(next);
+                // 把输入流的文件传到输出流中 如果是word/document.xml由我们输入
+                zipout.putNextEntry(new ZipEntry(next.toString()));
+                if ("word/document.xml".equals(next.toString())) {
+                    InputStream in = new FileInputStream(file);
+                    while ((len = in.read(buffer)) != -1) {
+                        zipout.write(buffer, 0, len);
+                    }
+                    in.close();
+                } else {
+                    while ((len = is.read(buffer)) != -1) {
+                        zipout.write(buffer, 0, len);
+                    }
+                    is.close();
                 }
-                in.close();
-            } else {
-                while ((len = is.read(buffer)) != -1) {
-                    zipout.write(buffer, 0, len);
-                }
-                is.close();
             }
+            zipout.close();
         }
-        zipout.close();
     }
 
 }
