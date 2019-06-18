@@ -127,7 +127,7 @@
                 <w:t xml:space="preserve"> </w:t>
             </w:r>
         </w:p>
-        <w:p w14:paraId="69D18911" w14:textId="77777777" w:rsidR="00350D09" w:rsidRPr="00350D09" w:rsidRDefault="000930D4" w:rsidP="00F94A24">
+        <w:p w14:paraId="NAME" w14:textId="77777777" w:rsidR="00350D09" w:rsidRPr="00350D09" w:rsidRDefault="000930D4" w:rsidP="00F94A24">
             <w:pPr>
                 <w:spacing w:line="360" w:lineRule="auto"/>
                 <w:rPr>
@@ -193,7 +193,7 @@
                 <w:t xml:space="preserve">                                         </w:t>
             </w:r>
         </w:p>
-        <w:p w14:paraId="26844850" w14:textId="77777777" w:rsidR="002851BF" w:rsidRPr="004B307F" w:rsidRDefault="002851BF" w:rsidP="00F94A24">
+        <w:p w14:paraId="GENDER" w14:textId="77777777" w:rsidR="002851BF" w:rsidRPr="004B307F" w:rsidRDefault="002851BF" w:rsidP="00F94A24">
             <w:pPr>
                 <w:spacing w:line="360" w:lineRule="auto"/>
                 <w:rPr>
@@ -237,7 +237,7 @@
                 <w:t xml:space="preserve">                                              </w:t>
             </w:r>
         </w:p>
-        <w:p w14:paraId="3BD6F78F" w14:textId="77777777" w:rsidR="00973624" w:rsidRPr="004B307F" w:rsidRDefault="00515BC7" w:rsidP="00F94A24">
+        <w:p w14:paraId="BIRTHYEAR" w14:textId="77777777" w:rsidR="00973624" w:rsidRPr="004B307F" w:rsidRDefault="00515BC7" w:rsidP="00F94A24">
             <w:pPr>
                 <w:tabs>
                     <w:tab w:val="left" w:pos="720"/>
@@ -277,7 +277,7 @@
                 <w:t>${birthyear}</w:t>
             </w:r>
         </w:p>
-        <w:p w14:paraId="40E40244" w14:textId="77777777" w:rsidR="002851BF" w:rsidRDefault="002851BF" w:rsidP="00F94A24">
+        <w:p w14:paraId="HOMEADDRESS" w14:textId="77777777" w:rsidR="002851BF" w:rsidRDefault="002851BF" w:rsidP="00F94A24">
             <w:pPr>
                 <w:spacing w:line="360" w:lineRule="auto"/>
                 <w:rPr>
@@ -321,7 +321,7 @@
                 <w:t>${homeAddress}</w:t>
             </w:r>
         </w:p>
-        <w:p w14:paraId="0637B1F7" w14:textId="77777777" w:rsidR="00954D83" w:rsidRPr="00954D83" w:rsidRDefault="00954D83" w:rsidP="00954D83">
+        <w:p w14:paraId="MARITAL" w14:textId="77777777" w:rsidR="00954D83" w:rsidRPr="00954D83" w:rsidRDefault="00954D83" w:rsidP="00954D83">
             <w:pPr>
                 <w:tabs>
                     <w:tab w:val="left" w:pos="720"/>
@@ -403,7 +403,7 @@
                 <w:t>COMPENSATION</w:t>
             </w:r>
         </w:p>
-        <w:p w14:paraId="5773F807" w14:textId="77777777" w:rsidR="004D3CF8" w:rsidRDefault="002A6C22" w:rsidP="0054234B">
+        <w:p w14:paraId="COMPENSATION" w14:textId="77777777" w:rsidR="004D3CF8" w:rsidRDefault="002A6C22" w:rsidP="0054234B">
             <w:pPr>
                 <w:spacing w:line="360" w:lineRule="auto"/>
                 <w:rPr>
@@ -460,7 +460,7 @@
                 </w:rPr>
             </w:pPr>
         </w:p>
-        <w:p w14:paraId="51BC2CE4" w14:textId="77777777" w:rsidR="002851BF" w:rsidRPr="001904FE" w:rsidRDefault="002851BF" w:rsidP="001904FE">
+        <w:p w14:paraId="EDUCATIONBACKGROUND" w14:textId="77777777" w:rsidR="002851BF" w:rsidRPr="001904FE" w:rsidRDefault="002851BF" w:rsidP="001904FE">
             <w:pPr>
                 <w:spacing w:line="360" w:lineRule="auto"/>
                 <w:rPr>
@@ -484,7 +484,7 @@
                 <w:t>EDUCATION BACKGROUND</w:t>
             </w:r>
         </w:p>
-        <w:p w14:paraId="3B130384" w14:textId="5EBE548F" w:rsidR="005C110C" w:rsidRDefault="000452C0" w:rsidP="005C110C">
+        <w:p w14:paraId="EDU0" w14:textId="5EBE548F" w:rsidR="005C110C" w:rsidRDefault="000452C0" w:rsidP="005C110C">
             <w:pPr>
                 <w:widowControl/>
                 <w:spacing w:line="360" w:lineRule="auto"/>
@@ -597,7 +597,7 @@
                 <w:t>${education0}</w:t>
             </w:r>
         </w:p>
-        <w:p w14:paraId="637AACE0" w14:textId="77777777" w:rsidR="008A52E3" w:rsidRDefault="005C110C" w:rsidP="005C110C">
+        <w:p w14:paraId="EDU1" w14:textId="77777777" w:rsidR="008A52E3" w:rsidRDefault="005C110C" w:rsidP="005C110C">
             <w:pPr>
                 <w:widowControl/>
                 <w:spacing w:line="360" w:lineRule="auto"/>
@@ -681,6 +681,119 @@
                     <w:szCs w:val="21"/>
                 </w:rPr>
                 <w:t>全日制统招硕士</w:t>
+            </w:r>
+        </w:p>
+        <w:p w14:paraId="EDU2" w14:textId="5EBE548F" w:rsidR="005C110C" w:rsidRDefault="000452C0" w:rsidP="005C110C">
+            <w:pPr>
+                <w:widowControl/>
+                <w:spacing w:line="360" w:lineRule="auto"/>
+                <w:jc w:val="left"/>
+                <w:rPr>
+                    <w:rFonts w:ascii="Arial" w:eastAsiaTheme="majorEastAsia" w:hAnsi="Arial" w:cs="Arial"/>
+                    <w:b/>
+                    <w:iCs/>
+                    <w:szCs w:val="21"/>
+                </w:rPr>
+            </w:pPr>
+            <w:r>
+                <w:rPr>
+                    <w:rFonts w:ascii="Arial" w:eastAsiaTheme="majorEastAsia" w:hAnsi="Arial" w:cs="Arial"/>
+                    <w:b/>
+                    <w:iCs/>
+                    <w:szCs w:val="21"/>
+                </w:rPr>
+                <w:t>${startEduDate0}</w:t>
+            </w:r>
+            <w:commentRangeStart w:id="8"/>
+            <w:r w:rsidR="00D10117">
+                <w:rPr>
+                    <w:rFonts w:ascii="Arial" w:eastAsiaTheme="majorEastAsia" w:hAnsi="Arial" w:cs="Arial" w:hint="eastAsia"/>
+                    <w:b/>
+                    <w:iCs/>
+                    <w:szCs w:val="21"/>
+                </w:rPr>
+                <w:t>-</w:t>
+            </w:r>
+            <w:r>
+                <w:rPr>
+                    <w:rFonts w:ascii="Arial" w:eastAsiaTheme="majorEastAsia" w:hAnsi="Arial" w:cs="Arial"/>
+                    <w:b/>
+                    <w:iCs/>
+                    <w:szCs w:val="21"/>
+                </w:rPr>
+                <w:t>${endEduDate0}</w:t>
+            </w:r>
+            <w:r w:rsidR="001904FE">
+                <w:rPr>
+                    <w:rFonts w:ascii="Arial" w:eastAsiaTheme="majorEastAsia" w:hAnsi="Arial" w:cs="Arial" w:hint="eastAsia"/>
+                    <w:b/>
+                    <w:iCs/>
+                    <w:szCs w:val="21"/>
+                </w:rPr>
+                <w:t xml:space="preserve">      </w:t>
+            </w:r>
+            <w:r w:rsidR="007B119E">
+                <w:rPr>
+                    <w:rFonts w:ascii="Arial" w:eastAsiaTheme="majorEastAsia" w:hAnsi="Arial" w:cs="Arial" w:hint="eastAsia"/>
+                    <w:b/>
+                    <w:iCs/>
+                    <w:szCs w:val="21"/>
+                </w:rPr>
+                <w:t xml:space="preserve"> </w:t>
+            </w:r>
+            <w:r w:rsidR="005C110C">
+                <w:rPr>
+                    <w:rFonts w:ascii="Arial" w:eastAsiaTheme="majorEastAsia" w:hAnsi="Arial" w:cs="Arial" w:hint="eastAsia"/>
+                    <w:b/>
+                    <w:iCs/>
+                    <w:szCs w:val="21"/>
+                </w:rPr>
+                <w:t xml:space="preserve">  </w:t>
+            </w:r>
+            <w:r>
+                <w:rPr>
+                    <w:rFonts w:ascii="Arial" w:eastAsiaTheme="majorEastAsia" w:hAnsi="Arial" w:cs="Arial" w:hint="eastAsia"/>
+                    <w:b/>
+                    <w:iCs/>
+                    <w:szCs w:val="21"/>
+                </w:rPr>
+                <w:t>${school0}</w:t>
+            </w:r>
+            <w:r w:rsidR="005C110C">
+                <w:rPr>
+                    <w:rFonts w:ascii="Arial" w:eastAsiaTheme="majorEastAsia" w:hAnsi="Arial" w:cs="Arial" w:hint="eastAsia"/>
+                    <w:b/>
+                    <w:iCs/>
+                    <w:szCs w:val="21"/>
+                </w:rPr>
+                <w:t xml:space="preserve">     </w:t>
+            </w:r>
+            <w:r>
+                <w:rPr>
+                    <w:rFonts w:ascii="Arial" w:eastAsiaTheme="majorEastAsia" w:hAnsi="Arial" w:cs="Arial" w:hint="eastAsia"/>
+                    <w:b/>
+                    <w:iCs/>
+                    <w:szCs w:val="21"/>
+                </w:rPr>
+                <w:t>${major0}</w:t>
+            </w:r>
+            <w:r w:rsidR="005C110C">
+                <w:rPr>
+                    <w:rFonts w:ascii="Arial" w:eastAsiaTheme="majorEastAsia" w:hAnsi="Arial" w:cs="Arial" w:hint="eastAsia"/>
+                    <w:b/>
+                    <w:iCs/>
+                    <w:szCs w:val="21"/>
+                </w:rPr>
+                <w:t xml:space="preserve">             </w:t>
+            </w:r>
+            <w:r w:rsidR="00E04915">
+                <w:rPr>
+                    <w:rFonts w:ascii="Arial" w:eastAsiaTheme="majorEastAsia" w:hAnsi="Arial" w:cs="Arial" w:hint="eastAsia"/>
+                    <w:b/>
+                    <w:iCs/>
+                    <w:szCs w:val="21"/>
+                </w:rPr>
+                <w:t>${education0}</w:t>
             </w:r>
         </w:p>
         <w:commentRangeEnd w:id="8"/>

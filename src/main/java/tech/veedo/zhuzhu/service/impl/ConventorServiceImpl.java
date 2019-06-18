@@ -4,11 +4,11 @@ import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import freemarker.template.Version;
-import org.dom4j.Document;
-import org.dom4j.DocumentException;
-import org.dom4j.Element;
-import org.dom4j.Node;
+import org.dom4j.*;
+import org.dom4j.io.OutputFormat;
 import org.dom4j.io.SAXReader;
+import org.dom4j.io.SAXWriter;
+import org.dom4j.io.XMLWriter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ResourceUtils;
@@ -105,85 +105,126 @@ public class ConventorServiceImpl implements ConventorService {
             total.putAll(remarkMap);
         }
 
-
-        // 模板文件路径：
-        String templateFilePath = "classpath:templates/";
-        String templateDocxName = "document.docx";
-        String templateXmlName = "document.xml";
-
+        // 原始模板文件路径：
+        String oriTemplateDir = "classpath:templates/";
+        String oriTemplateDocx = "document.docx";
+        String oriTemplateXml = "document.xml";
+        // 生成的中转路径
+        String tmpDir = "C:/Users/50689/Desktop/IO/tmp/";
+        String tmpXml = "document.xml";
         // 目标文件存放路径
 //        String outDirPath = "/Users/ifzhang/Downloads/";  // mac
         String outDirPath = "C:/Users/50689/Desktop/IO/";  // windows
-        String tmpXmlName = "temp.xml";
-        String finalDocxName = "final.docx";
+        String finalDocxName = "final"+System.currentTimeMillis()+".docx";
+
+        // 1.获取xml，并根据获取的对象，生成临时xml
+        {
+            // 创建SAXReader的对象reader
+            SAXReader reader = new SAXReader();
+            // 通过reader对象的read方法加载xml文件,获取docuemnt对象。
+            Document document = reader.read(ResourceUtils.getFile(oriTemplateDir + oriTemplateXml));
+
+
+            Node EDUCATIONBACKGROUND = document.selectSingleNode("p[@paraId='EDUCATIONBACKGROUND']");
+
+
+
+            // 通过document对象获取根节点
+            Element root = document.getRootElement();
+            Element body = root.element("body");
+
+            {
+                List<Element> elements = body.elements("p");
+                elements.forEach(element -> System.out.println(element.attributeValue("paraId")));
+
+            }
+
+
+//            List<Element> ps = body.elements();
+//            Element EDUCATIONBACKGROUND = ps.stream()
+//                    .filter(p -> p.attributeValue("paraId").equals("EDUCATIONBACKGROUND"))
+//                    .findAny().orElse(null);
+//
+//            Element EDU1 = ps.stream()
+//                    .filter(p -> p.attributeValue("paraId").equals("EDU1"))
+//                    .findAny().orElse(null);
+//
+//
+//            educationBackgrounds.forEach(educationBackground -> {
+//
+////                DocumentHelper.createElement()
+//                EDUCATIONBACKGROUND.appendContent(EDU1);
+//            });
+//
+//            System.out.println(document.asXML());
+//
+//            OutputFormat of = new OutputFormat();
+//            of.setEncoding("UTF-8");
+//            of.setNewlines(true);
+//            of.setIndent(true);
+//            of.setIndent("    ");
+//
+//            XMLWriter writer = new XMLWriter(of);
+//
+//            File file = new File(templateFilePath + real);
+//            if (!file.exists()) file.createNewFile();
+//            writer.setOutputStream(new FileOutputStream(file));
+//            writer.write(document);
+//            writer.flush();
+//            writer.close();
+        }
 
 //        {
-//            // 分析对象，并生成对应模板
-//            // 创建SAXReader的对象reader
-//            SAXReader reader = new SAXReader();
+//            // 模板路径
+//            File oriTemplatePath = ResourceUtils.getFile(oriTemplateDir);
 //
-//            // 通过reader对象的read方法加载xml文件,获取docuemnt对象。
-//            Document document = reader.read(ResourceUtils.getFile(templateFilePath + templateXmlName));
+//            Configuration configuration = new Configuration(new Version("2.3.0"));
+//            configuration.setDefaultEncoding("UTF-8");
+//            // 加载模板数据（从文件路径中获取文件，其他方式，可百度查找）
+//            configuration.setDirectoryForTemplateLoading(oriTemplatePath);
+//            // 获取模板实例
+//            Template template = configuration.getTemplate(oriTemplateXml);
+//            template.setOutputEncoding("UTF-8");
 //
-//            // 通过document对象获取根节点
-//            Element wdocument = document.getRootElement();
-//
-//            Element wbody = wdocument.element("body");
-//
-//            List<Element> wps = wbody.elements();
-//
-//            wps.forEach(wp ->
-//                System.out.println(wp.attributeValue("paraId"))
-//            );
+//            //将模板和数据模型合并生成文件
+//            Writer out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(new File(tmpDir + tmpXml)),"UTF-8"));
+//            //生成临时xml模板文件
+//            template.process(total, out);
+//            out.flush();
+//            out.close();
 //        }
-
-        {
-            // xml路径
-            File templatePath = ResourceUtils.getFile(templateFilePath);
-            Configuration configuration = new Configuration(new Version("2.3.0"));
-            configuration.setDefaultEncoding("UTF-8");
-            // 加载模板数据（从文件路径中获取文件，其他方式，可百度查找）
-            configuration.setDirectoryForTemplateLoading(templatePath);
-            // 获取模板实例
-            Template template = configuration.getTemplate(templateXmlName);
-            template.setOutputEncoding("UTF-8");
-
-            //将模板和数据模型合并生成文件
-            Writer out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(new File(outDirPath + tmpXmlName)),"UTF-8"));
-            //生成xmldocx文件
-            template.process(total, out);
-            out.flush();
-            out.close();
-        }
-
-        {
-            File file = new File(outDirPath + tmpXmlName);
-            File docxFile = ResourceUtils.getFile(templateFilePath + templateDocxName);
-            ZipFile zipFile = new ZipFile(docxFile);
-            Enumeration<? extends ZipEntry> zipEntrys = zipFile.entries();
-            ZipOutputStream zipout = new ZipOutputStream(new FileOutputStream(outDirPath + finalDocxName));
-            int len;
-            byte[] buffer = new byte[1024];
-            while (zipEntrys.hasMoreElements()) {
-                ZipEntry next = zipEntrys.nextElement();
-                InputStream is = zipFile.getInputStream(next);
-                // 把输入流的文件传到输出流中 如果是word/document.xml由我们输入
-                zipout.putNextEntry(new ZipEntry(next.toString()));
-                if ("word/document.xml".equals(next.toString())) {
-                    InputStream in = new FileInputStream(file);
-                    while ((len = in.read(buffer)) != -1) {
-                        zipout.write(buffer, 0, len);
-                    }
-                    in.close();
-                } else {
-                    while ((len = is.read(buffer)) != -1) {
-                        zipout.write(buffer, 0, len);
-                    }
-                    is.close();
-                }
-            }
-            zipout.close();
-        }
+//
+//        {
+//            // 临时xml文件
+//            File file = new File(tmpDir + tmpXml);
+//            // 获取docx文件
+//            File oriDocx = ResourceUtils.getFile(oriTemplateDir + oriTemplateDocx);
+//
+//            ZipFile zipFile = new ZipFile(oriDocx);
+//            Enumeration<? extends ZipEntry> zipEntrys = zipFile.entries();
+//            ZipOutputStream zipout = new ZipOutputStream(new FileOutputStream(outDirPath + finalDocxName));
+//            int len;
+//            byte[] buffer = new byte[1024];
+//            while (zipEntrys.hasMoreElements()) {
+//                ZipEntry next = zipEntrys.nextElement();
+//                InputStream is = zipFile.getInputStream(next);
+//                // 把输入流的文件传到输出流中 如果是word/document.xml由我们输入
+//                zipout.putNextEntry(new ZipEntry(next.toString()));
+//                if ("word/document.xml".equals(next.toString())) {
+//                    InputStream in = new FileInputStream(file);
+//                    while ((len = in.read(buffer)) != -1) {
+//                        zipout.write(buffer, 0, len);
+//                    }
+//                    in.close();
+//                } else {
+//                    while ((len = is.read(buffer)) != -1) {
+//                        zipout.write(buffer, 0, len);
+//                    }
+//                    is.close();
+//                }
+//            }
+//            zipout.close();
+//        }
     }
 
 }
