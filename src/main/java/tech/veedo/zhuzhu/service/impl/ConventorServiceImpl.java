@@ -124,17 +124,12 @@ public class ConventorServiceImpl implements ConventorService {
             // 通过reader对象的read方法加载xml文件,获取docuemnt对象。
             Document document = reader.read(ResourceUtils.getFile(oriTemplateDir + oriTemplateXml));
 
-
-            Node EDUCATIONBACKGROUND = document.selectSingleNode("p[@paraId='EDUCATIONBACKGROUND']");
-
-
-
             // 通过document对象获取根节点
             Element root = document.getRootElement();
             Element body = root.element("body");
 
             {
-                List<Element> elements = body.elements("p");
+                List<Element> elements = body.elements("");
                 elements.forEach(element -> System.out.println(element.attributeValue("paraId")));
 
             }
