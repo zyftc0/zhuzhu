@@ -20,6 +20,7 @@ public class PersonalInfoTemplate {
         StringBuffer sb = new StringBuffer();
         sb.append(part1);
         sb.append(pit.dynamicGenerate(pit.name, params));
+        sb.append(pit.dynamicGenerate(pit.gender, params));
         return sb.toString();
     }
 
@@ -128,4 +129,50 @@ public class PersonalInfoTemplate {
             "                <w:t xml:space=\"preserve\">                                         </w:t>\n" +
             "            </w:r>\n" +
             "        </w:p>";
+
+    private static final String gender =
+            "        <w:p w14:paraId=\"GENDER\" w14:textId=\"77777777\" w:rsidR=\"002851BF\" w:rsidRPr=\"004B307F\" w:rsidRDefault=\"002851BF\" w:rsidP=\"00F94A24\">\n" +
+                    "            <w:pPr>\n" +
+                    "                <w:spacing w:line=\"360\" w:lineRule=\"auto\"/>\n" +
+                    "                <w:rPr>\n" +
+                    "                    <w:rFonts w:ascii=\"Arial\" w:hAnsi=\"Arial\" w:cs=\"Arial\"/>\n" +
+                    "                    <w:b/>\n" +
+                    "                    <w:szCs w:val=\"21\"/>\n" +
+                    "                    <w:lang w:val=\"en-GB\"/>\n" +
+                    "                </w:rPr>\n" +
+                    "            </w:pPr>\n" +
+                    "            <w:commentRangeStart w:id=\"3\"/>\n" +
+                    "            <w:r w:rsidRPr=\"004B307F\">\n" +
+                    "                <w:rPr>\n" +
+                    "                    <w:rFonts w:ascii=\"Arial\" w:hAnsi=\"Arial\" w:cs=\"Arial\"/>\n" +
+                    "                    <w:b/>\n" +
+                    "                    <w:szCs w:val=\"21\"/>\n" +
+                    "                    <w:lang w:val=\"en-GB\"/>\n" +
+                    "                </w:rPr>\n" +
+                    "                <w:t>Gender:</w:t>\n" +
+                    "            </w:r>\n" +
+                    "            <w:commentRangeEnd w:id=\"3\"/>\n" +
+                    "            <w:r w:rsidR=\"00397C81\">\n" +
+                    "                <w:rPr>\n" +
+                    "                    <w:rStyle w:val=\"af9\"/>\n" +
+                    "                </w:rPr>\n" +
+                    "                <w:commentReference w:id=\"3\"/>\n" +
+                    "            </w:r>\n" +
+                    "            <w:r w:rsidR=\"000452C0\">\n" +
+                    "                <w:rPr>\n" +
+                    "                    <w:rFonts w:ascii=\"Arial\" w:hAnsi=\"Arial\" w:cs=\"Arial\" w:hint=\"eastAsia\"/>\n" +
+                    "                    <w:szCs w:val=\"21\"/>\n" +
+                    "                    <w:lang w:val=\"en-GB\"/>\n" +
+                    "                </w:rPr>\n" +
+                    "                <w:t>#w#o#gender#r#d#</w:t>\n" +
+                    "            </w:r>\n" +
+                    "            <w:r w:rsidR=\"00350D09\">\n" +
+                    "                <w:rPr>\n" +
+                    "                    <w:rFonts w:ascii=\"Arial\" w:hAnsi=\"Arial\" w:cs=\"Arial\" w:hint=\"eastAsia\"/>\n" +
+                    "                    <w:szCs w:val=\"21\"/>\n" +
+                    "                    <w:lang w:val=\"en-GB\"/>\n" +
+                    "                </w:rPr>\n" +
+                    "                <w:t xml:space=\"preserve\">                                              </w:t>\n" +
+                    "            </w:r>\n" +
+                    "        </w:p>";
 }
