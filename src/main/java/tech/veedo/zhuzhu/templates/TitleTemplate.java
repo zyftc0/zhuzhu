@@ -20,7 +20,7 @@ public class TitleTemplate {
     }
 
     private String dynamicGenerate(String origin, HashMap<String, Object> titleMap) {
-        return StringUtils.format(title, titleMap);
+        return StringUtils.format(origin, titleMap);
     }
 
     private static final String title =
