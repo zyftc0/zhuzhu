@@ -175,4 +175,180 @@ public class PersonalInfoTemplate {
                     "                <w:t xml:space=\"preserve\">                                              </w:t>\n" +
                     "            </w:r>\n" +
                     "        </w:p>";
+
+    private static final String birthyear =
+            "        <w:p w14:paraId=\"BIRTHYEAR\" w14:textId=\"77777777\" w:rsidR=\"00973624\" w:rsidRPr=\"004B307F\" w:rsidRDefault=\"00515BC7\" w:rsidP=\"00F94A24\">\n" +
+                    "            <w:pPr>\n" +
+                    "                <w:tabs>\n" +
+                    "                    <w:tab w:val=\"left\" w:pos=\"720\"/>\n" +
+                    "                    <w:tab w:val=\"left\" w:pos=\"2265\"/>\n" +
+                    "                </w:tabs>\n" +
+                    "                <w:spacing w:line=\"360\" w:lineRule=\"auto\"/>\n" +
+                    "                <w:rPr>\n" +
+                    "                    <w:rFonts w:ascii=\"Arial\" w:hAnsi=\"Arial\" w:cs=\"Arial\"/>\n" +
+                    "                    <w:b/>\n" +
+                    "                    <w:szCs w:val=\"21\"/>\n" +
+                    "                    <w:lang w:val=\"en-GB\"/>\n" +
+                    "                </w:rPr>\n" +
+                    "            </w:pPr>\n" +
+                    "            <w:commentRangeStart w:id=\"4\"/>\n" +
+                    "            <w:r w:rsidRPr=\"005778D5\">\n" +
+                    "                <w:rPr>\n" +
+                    "                    <w:rFonts w:ascii=\"Arial\" w:hAnsi=\"Arial\" w:cs=\"Arial\"/>\n" +
+                    "                    <w:b/>\n" +
+                    "                    <w:szCs w:val=\"21\"/>\n" +
+                    "                    <w:lang w:val=\"en-GB\"/>\n" +
+                    "                </w:rPr>\n" +
+                    "                <w:t>Birth Year:</w:t>\n" +
+                    "            </w:r>\n" +
+                    "            <w:commentRangeEnd w:id=\"4\"/>\n" +
+                    "            <w:r w:rsidR=\"00397C81\">\n" +
+                    "                <w:rPr>\n" +
+                    "                    <w:rStyle w:val=\"af9\"/>\n" +
+                    "                </w:rPr>\n" +
+                    "                <w:commentReference w:id=\"4\"/>\n" +
+                    "            </w:r>\n" +
+                    "            <w:r w:rsidR=\"000452C0\">\n" +
+                    "                <w:rPr>\n" +
+                    "                    <w:rFonts w:ascii=\"Arial\" w:hAnsi=\"Arial\" w:cs=\"Arial\"/>\n" +
+                    "                    <w:szCs w:val=\"21\"/>\n" +
+                    "                    <w:lang w:val=\"en-GB\"/>\n" +
+                    "                </w:rPr>\n" +
+                    "                <w:t>${birthyear}</w:t>\n" +
+                    "            </w:r>\n" +
+                    "        </w:p>";
+
+    private static final String homeAddress =
+            "        <w:p w14:paraId=\"HOMEADDRESS\" w14:textId=\"77777777\" w:rsidR=\"002851BF\" w:rsidRDefault=\"002851BF\" w:rsidP=\"00F94A24\">\n" +
+                    "            <w:pPr>\n" +
+                    "                <w:spacing w:line=\"360\" w:lineRule=\"auto\"/>\n" +
+                    "                <w:rPr>\n" +
+                    "                    <w:rFonts w:ascii=\"Arial\" w:hAnsi=\"Arial\" w:cs=\"Arial\"/>\n" +
+                    "                    <w:szCs w:val=\"21\"/>\n" +
+                    "                    <w:lang w:val=\"en-GB\"/>\n" +
+                    "                </w:rPr>\n" +
+                    "            </w:pPr>\n" +
+                    "            <w:commentRangeStart w:id=\"5\"/>\n" +
+                    "            <w:r w:rsidRPr=\"004B307F\">\n" +
+                    "                <w:rPr>\n" +
+                    "                    <w:rFonts w:ascii=\"Arial\" w:hAnsi=\"Arial\" w:cs=\"Arial\"/>\n" +
+                    "                    <w:b/>\n" +
+                    "                    <w:szCs w:val=\"21\"/>\n" +
+                    "                    <w:lang w:val=\"en-GB\"/>\n" +
+                    "                </w:rPr>\n" +
+                    "                <w:t>Home Address:</w:t>\n" +
+                    "            </w:r>\n" +
+                    "            <w:commentRangeEnd w:id=\"5\"/>\n" +
+                    "            <w:r w:rsidR=\"00397C81\">\n" +
+                    "                <w:rPr>\n" +
+                    "                    <w:rStyle w:val=\"af9\"/>\n" +
+                    "                </w:rPr>\n" +
+                    "                <w:commentReference w:id=\"5\"/>\n" +
+                    "            </w:r>\n" +
+                    "            <w:r w:rsidRPr=\"004B307F\">\n" +
+                    "                <w:rPr>\n" +
+                    "                    <w:rFonts w:ascii=\"Arial\" w:hAnsi=\"Arial\" w:cs=\"Arial\"/>\n" +
+                    "                    <w:b/>\n" +
+                    "                    <w:szCs w:val=\"21\"/>\n" +
+                    "                    <w:lang w:val=\"en-GB\"/>\n" +
+                    "                </w:rPr>\n" +
+                    "                <w:t xml:space=\"preserve\"> </w:t>\n" +
+                    "            </w:r>\n" +
+                    "            <w:r w:rsidR=\"000452C0\">\n" +
+                    "                <w:rPr>\n" +
+                    "                    <w:rFonts w:ascii=\"Arial\" w:hAnsi=\"Arial\" w:cs=\"Arial\" w:hint=\"eastAsia\"/>\n" +
+                    "                    <w:szCs w:val=\"21\"/>\n" +
+                    "                    <w:lang w:val=\"en-GB\"/>\n" +
+                    "                </w:rPr>\n" +
+                    "                <w:t>${homeAddress}</w:t>\n" +
+                    "            </w:r>\n" +
+                    "        </w:p>";
+
+    private static final String marital =
+            "        <w:p w14:paraId=\"MARITAL\" w14:textId=\"77777777\" w:rsidR=\"00954D83\" w:rsidRPr=\"00954D83\" w:rsidRDefault=\"00954D83\" w:rsidP=\"00954D83\">\n" +
+                    "            <w:pPr>\n" +
+                    "                <w:tabs>\n" +
+                    "                    <w:tab w:val=\"left\" w:pos=\"720\"/>\n" +
+                    "                    <w:tab w:val=\"left\" w:pos=\"2265\"/>\n" +
+                    "                </w:tabs>\n" +
+                    "                <w:spacing w:line=\"360\" w:lineRule=\"auto\"/>\n" +
+                    "                <w:rPr>\n" +
+                    "                    <w:rFonts w:ascii=\"Arial\" w:hAnsi=\"Arial\" w:cs=\"Arial\"/>\n" +
+                    "                    <w:b/>\n" +
+                    "                    <w:szCs w:val=\"21\"/>\n" +
+                    "                    <w:lang w:val=\"en-GB\"/>\n" +
+                    "                </w:rPr>\n" +
+                    "            </w:pPr>\n" +
+                    "            <w:commentRangeStart w:id=\"6\"/>\n" +
+                    "            <w:r w:rsidRPr=\"004B307F\">\n" +
+                    "                <w:rPr>\n" +
+                    "                    <w:rFonts w:ascii=\"Arial\" w:hAnsi=\"Arial\" w:cs=\"Arial\"/>\n" +
+                    "                    <w:b/>\n" +
+                    "                    <w:szCs w:val=\"21\"/>\n" +
+                    "                    <w:lang w:val=\"en-GB\"/>\n" +
+                    "                </w:rPr>\n" +
+                    "                <w:t>Marital Status:</w:t>\n" +
+                    "            </w:r>\n" +
+                    "            <w:commentRangeEnd w:id=\"6\"/>\n" +
+                    "            <w:r w:rsidR=\"00397C81\">\n" +
+                    "                <w:rPr>\n" +
+                    "                    <w:rStyle w:val=\"af9\"/>\n" +
+                    "                </w:rPr>\n" +
+                    "                <w:commentReference w:id=\"6\"/>\n" +
+                    "            </w:r>\n" +
+                    "            <w:r w:rsidRPr=\"004B307F\">\n" +
+                    "                <w:rPr>\n" +
+                    "                    <w:rFonts w:ascii=\"Arial\" w:hAnsi=\"Arial\" w:cs=\"Arial\"/>\n" +
+                    "                    <w:b/>\n" +
+                    "                    <w:szCs w:val=\"21\"/>\n" +
+                    "                    <w:lang w:val=\"en-GB\"/>\n" +
+                    "                </w:rPr>\n" +
+                    "                <w:t xml:space=\"preserve\"> </w:t>\n" +
+                    "            </w:r>\n" +
+                    "            <w:r w:rsidR=\"000452C0\">\n" +
+                    "                <w:rPr>\n" +
+                    "                    <w:rFonts w:ascii=\"Arial\" w:hAnsi=\"Arial\" w:cs=\"Arial\" w:hint=\"eastAsia\"/>\n" +
+                    "                    <w:szCs w:val=\"21\"/>\n" +
+                    "                    <w:lang w:val=\"en-GB\"/>\n" +
+                    "                </w:rPr>\n" +
+                    "                <w:t>${maritalStatus}</w:t>\n" +
+                    "            </w:r>\n" +
+                    "        </w:p>";
+
+    private static final String part2 =
+            "        <w:p w14:paraId=\"21B2FA3E\" w14:textId=\"77777777\" w:rsidR=\"0082265F\" w:rsidRPr=\"004B307F\" w:rsidRDefault=\"0082265F\" w:rsidP=\"00F94A24\">\n" +
+                    "            <w:pPr>\n" +
+                    "                <w:spacing w:line=\"360\" w:lineRule=\"auto\"/>\n" +
+                    "                <w:rPr>\n" +
+                    "                    <w:rFonts w:ascii=\"Arial\" w:hAnsi=\"Arial\" w:cs=\"Arial\"/>\n" +
+                    "                    <w:b/>\n" +
+                    "                    <w:szCs w:val=\"21\"/>\n" +
+                    "                    <w:lang w:val=\"en-GB\"/>\n" +
+                    "                </w:rPr>\n" +
+                    "            </w:pPr>\n" +
+                    "        </w:p>";
+
+    private static final String part3 =
+            "        <w:p w14:paraId=\"6A36E820\" w14:textId=\"77777777\" w:rsidR=\"004722A4\" w:rsidRDefault=\"002851BF\" w:rsidP=\"0054234B\">\n" +
+                    "            <w:pPr>\n" +
+                    "                <w:spacing w:line=\"360\" w:lineRule=\"auto\"/>\n" +
+                    "                <w:rPr>\n" +
+                    "                    <w:rFonts w:ascii=\"Arial\" w:hAnsi=\"Arial\" w:cs=\"Arial\"/>\n" +
+                    "                    <w:b/>\n" +
+                    "                    <w:bCs/>\n" +
+                    "                    <w:szCs w:val=\"21\"/>\n" +
+                    "                    <w:u w:val=\"single\"/>\n" +
+                    "                </w:rPr>\n" +
+                    "            </w:pPr>\n" +
+                    "            <w:r w:rsidRPr=\"005778D5\">\n" +
+                    "                <w:rPr>\n" +
+                    "                    <w:rFonts w:ascii=\"Arial\" w:hAnsi=\"Arial\" w:cs=\"Arial\"/>\n" +
+                    "                    <w:b/>\n" +
+                    "                    <w:bCs/>\n" +
+                    "                    <w:szCs w:val=\"21\"/>\n" +
+                    "                    <w:u w:val=\"single\"/>\n" +
+                    "                </w:rPr>\n" +
+                    "                <w:t>COMPENSATION</w:t>\n" +
+                    "            </w:r>\n" +
+                    "        </w:p>";
 }
