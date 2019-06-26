@@ -25,72 +25,98 @@ public class ConventorServiceImpl implements ConventorService {
     private String templatePath;
 
     public static void main(String[] args) throws IOException, TemplateException, DocumentException {
-        Title title = new Title()
-                .setPost("八十万禁军教头")
-                .setPostLocation("汴梁");
-        PersonalInformation pi = new PersonalInformation()
-                .setName("盖伦")
-                .setGender(0)
-                .setBirthyear("1993")
-                .setHomeAddress("德玛西亚")
-                .setMaritalStatus(1);
-        Compensation compensation = new Compensation()
-                .setCompensation("234W");
+        CandidateReport report = new CandidateReport();
+        {
+            Title title = new Title()
+                    .setPost("八十万禁军教头")
+                    .setPostLocation("汴梁");
+            PersonalInformation pi = new PersonalInformation()
+                    .setName("盖伦20190626")
+                    .setGender(0)
+                    .setBirthyear("1993")
+                    .setHomeAddress("德玛西亚")
+                    .setMaritalStatus(1);
+            Compensation compensation = new Compensation()
+                    .setCompensation("234W");
 
-        List<EducationBackground> educationBackgrounds = new ArrayList<>();
-        EducationBackground e1 = new EducationBackground()
-                .setStartEduDate("2018.01")
-                .setEndEduDate("2018.10")
-                .setSchool("东北林业大学")
-                .setMajor("软件工程")
-                .setEducation("学士");
-        EducationBackground e2 = new EducationBackground()
-                .setStartEduDate("2019.01")
-                .setEndEduDate("2019.06")
-                .setSchool("东北打麻将大学2")
-                .setMajor("软件a 程")
-                .setEducation("学 3 士");
-        educationBackgrounds.add(e1);
-        educationBackgrounds.add(e2);
+            List<EducationBackground> educationBackgrounds = new ArrayList<>();
+            EducationBackground e1 = new EducationBackground()
+                    .setStartEduDate("2018.01")
+                    .setEndEduDate("2018.10")
+                    .setSchool("东北林业大学")
+                    .setMajor("软件工程")
+                    .setEducation("学士");
+            EducationBackground e2 = new EducationBackground()
+                    .setStartEduDate("2019.01")
+                    .setEndEduDate("2019.06")
+                    .setSchool("东北打麻将大学2")
+                    .setMajor("软件a 程")
+                    .setEducation("学 3 士");
+            educationBackgrounds.add(e1);
+            educationBackgrounds.add(e2);
 
-        List<WorkExperience> workExperiences = new ArrayList<>();
-        WorkExperience w1 = new WorkExperience()
-                .setStartJobDate("2020.01")
-                .setEndJobDate("2020.10")
-                .setCompanyName("zhongtiejian")
-                .setCompanyPost("总裁")
-                .setCompanyInfomation("this is chaofhnahjioejfio \n ada ")
-                .setLeader("董事长")
-                .setSubordinateCount("19")
-                .setJobContent("我二姨不知道干啥")
-                .setPerformance("你谬比就完事了")
-                .setReason("不想干了");
-        workExperiences.add(w1);
+            List<WorkExperience> workExperiences = new ArrayList<>();
+            WorkExperience w1 = new WorkExperience()
+                    .setStartJobDate("2020.01")
+                    .setEndJobDate("2020.10")
+                    .setCompanyName("zhongtiejian")
+                    .setCompanyPost("总裁")
+                    .setCompanyInfomation("this is chaofhnahjioejfio ada ")
+                    .setLeader("董事长")
+                    .setSubordinateCount("19")
+                    .setJobContent("我二姨不知道干啥")
+                    .setPerformance("你谬比就完事了")
+                    .setReason("不想干了");
+            workExperiences.add(w1);
+            WorkExperience w2 = new WorkExperience()
+                    .setStartJobDate("2020.01")
+                    .setEndJobDate("2020.10")
+                    .setCompanyName("zhongtiejian")
+                    .setCompanyPost("总裁")
+                    .setCompanyInfomation("this is chaofhnahjioejfio ada ")
+                    .setLeader("董事长")
+                    .setSubordinateCount("19")
+                    .setJobContent("我二姨不知道干啥")
+                    .setPerformance("你谬比123就完事了")
+                    .setReason("不想干了");
+            workExperiences.add(w2);
 
-        List<ProjectExperience> projectExperiences = new ArrayList<>();
-        ProjectExperience p1 = new ProjectExperience()
-                .setStartProjDate("2020.02")
-                .setEndProjDate("2020.09")
-                .setProjectName("wooo")
-                .setProjectPost("军团长")
-                .setProjectContent("带兵打仗")
-                .setProjectDuty("不知道")
-                .setProjectPerformance("赢了");
-        projectExperiences.add(p1);
+            List<ProjectExperience> projectExperiences = new ArrayList<>();
+            ProjectExperience p1 = new ProjectExperience()
+                    .setStartProjDate("2020.02")
+                    .setEndProjDate("2020.09")
+                    .setProjectName("wooo")
+                    .setProjectPost("军团长")
+                    .setProjectContent("带兵打仗")
+                    .setProjectDuty("不知道")
+                    .setProjectPerformance("赢了");
+            projectExperiences.add(p1);
+            ProjectExperience p2 = new ProjectExperience()
+                    .setStartProjDate("2020.02")
+                    .setEndProjDate("2020.09")
+                    .setProjectName("wooo")
+                    .setProjectPost("军团长")
+                    .setProjectContent("带兵打仗")
+                    .setProjectDuty("不知321道")
+                    .setProjectPerformance("赢了");
+            projectExperiences.add(p2);
 
-        List<Remark> remarks = new ArrayList<>();
-        Remark r1 = new Remark()
-                .setRemark("啊啊");
-        remarks.add(r1);
+            List<Remark> remarks = new ArrayList<>();
+            Remark r1 = new Remark()
+                    .setRemark("啊啊");
+            remarks.add(r1);
+            Remark r2 = new Remark()
+                    .setRemark("我是沐浴着党的阳光，在党的教育下成长起来的。在成长的历程中，我的父母家人对我的世界观、人生观和价值观的树立，起到了非常重要的作用，在我很小的时候，他们就带着我观看革命影片，给我讲述革命先烈的英雄事迹，让红色的种子从小就在我的心中生根发芽，让党的光辉形象伴随");
+            remarks.add(r2);
 
-        CandidateReport report = new CandidateReport()
-                .setTitle(title)
-                .setPersonalInformation(pi)
-                .setCompensation(compensation)
-                .setEducationBackgrounds(educationBackgrounds)
-                .setWorkExperiences(workExperiences)
-                .setProjectExperiences(projectExperiences)
-                .setRemarks(remarks);
+            report.setTitle(title)
+                    .setPersonalInformation(pi)
+                    .setCompensation(compensation)
+                    .setEducationBackgrounds(educationBackgrounds)
+                    .setWorkExperiences(workExperiences)
+                    .setProjectExperiences(projectExperiences)
+                    .setRemarks(remarks);
+        }
 
         // 原始模板文件路径：
         String oriTemplateDir = "classpath:templates/";
@@ -108,60 +134,25 @@ public class ConventorServiceImpl implements ConventorService {
 
         // 1.获取xml，并根据获取的对象，生成临时xml
         {
-//            // 创建SAXReader的对象reader
-//            SAXReader reader = new SAXReader();
-//            // 通过reader对象的read方法加载xml文件,获取docuemnt对象。
-//            Document document = reader.read(ResourceUtils.getFile(oriTemplateDir + oriTemplateXml));
-//
-//            // 通过document对象获取根节点
-//            Element root = document.getRootElement();
-//            Element body = root.element("body");
-//
-//            Node EDUCATIONBACKGROUND = body.selectSingleNode("./w:p[@w14:paraId='EDUCATIONBACKGROUND']");
-//
-//            String unique = EDUCATIONBACKGROUND.getUniquePath();
-//            Integer index = Integer.parseInt(unique.substring(unique.indexOf("[")+1, unique.length()-1));
-//
-//            System.out.println(index);
-//
-//            Element test = DocumentHelper.createElement("w:p");
-
-
-//            List<Element> ps = body.elements();
-//            Element EDUCATIONBACKGROUND = ps.stream()
-//                    .filter(p -> p.attributeValue("paraId").equals("EDUCATIONBACKGROUND"))
-//                    .findAny().orElse(null);
-//
-//            Element EDU1 = ps.stream()
-//                    .filter(p -> p.attributeValue("paraId").equals("EDU1"))
-//                    .findAny().orElse(null);
-//
-//
-//            educationBackgrounds.forEach(educationBackground -> {
-//
-////                DocumentHelper.createElement()
-//                EDUCATIONBACKGROUND.appendContent(EDU1);
-//            });
-//
-//            System.out.println(document.asXML());
-
             String doctmp = DocumentTemplate.generateXMLStr(report);
-//            Document doc = DocumentHelper.parseText(doctmp);
 
-//            OutputFormat of = new OutputFormat();
-//            of.setEncoding("UTF-8");
-//            of.setNewlines(true);
-//            of.setIndent(true);
-//            of.setIndent("    ");
-//
-//            XMLWriter writer = new XMLWriter(of);
-//
-//            File file = new File(tmpDir + tmpXml);
-//            if (!file.exists()) file.createNewFile();
-//            writer.setOutputStream(new FileOutputStream(file));
-//            writer.write(doc);
-//            writer.flush();
-//            writer.close();
+            System.out.println(doctmp);
+            Document doc = DocumentHelper.parseText(doctmp);
+
+            OutputFormat of = new OutputFormat();
+            of.setEncoding("UTF-8");
+            of.setNewlines(true);
+            of.setIndent(true);
+            of.setIndent("    ");
+
+            XMLWriter writer = new XMLWriter(of);
+
+            File file = new File(tmpDir + tmpXml);
+            if (!file.exists()) file.createNewFile();
+            writer.setOutputStream(new FileOutputStream(file));
+            writer.write(doc);
+            writer.flush();
+            writer.close();
         }
 
 //        {
@@ -184,37 +175,37 @@ public class ConventorServiceImpl implements ConventorService {
 //            out.close();
 //        }
 
-//        {
-//            // 临时xml文件
-//            File file = new File(tmpDir + tmpXml);
-//            // 获取docx原始模板文件
-//            File oriDocx = ResourceUtils.getFile(oriTemplateDir + oriTemplateDocx);
-//            ZipFile zipFile = new ZipFile(oriDocx);
-//
-//            Enumeration<? extends ZipEntry> zipEntrys = zipFile.entries();
-//            ZipOutputStream zipout = new ZipOutputStream(new FileOutputStream(outDirPath + finalDocxName));
-//            int len;
-//            byte[] buffer = new byte[1024];
-//            while (zipEntrys.hasMoreElements()) {
-//                ZipEntry next = zipEntrys.nextElement();
-//                InputStream is = zipFile.getInputStream(next);
-//                // 把输入流的文件传到输出流中 如果是word/document.xml由我们输入
-//                zipout.putNextEntry(new ZipEntry(next.toString()));
-//                if ("word/document.xml".equals(next.toString())) {
-//                    InputStream in = new FileInputStream(file);
-//                    while ((len = in.read(buffer)) != -1) {
-//                        zipout.write(buffer, 0, len);
-//                    }
-//                    in.close();
-//                } else {
-//                    while ((len = is.read(buffer)) != -1) {
-//                        zipout.write(buffer, 0, len);
-//                    }
-//                    is.close();
-//                }
-//            }
-//            zipout.close();
-//        }
+        {
+            // 临时xml文件
+            File file = new File(tmpDir + tmpXml);
+            // 获取docx原始模板文件
+            File oriDocx = ResourceUtils.getFile(oriTemplateDir + oriTemplateDocx);
+            ZipFile zipFile = new ZipFile(oriDocx);
+
+            Enumeration<? extends ZipEntry> zipEntrys = zipFile.entries();
+            ZipOutputStream zipout = new ZipOutputStream(new FileOutputStream(outDirPath + finalDocxName));
+            int len;
+            byte[] buffer = new byte[1024];
+            while (zipEntrys.hasMoreElements()) {
+                ZipEntry next = zipEntrys.nextElement();
+                InputStream is = zipFile.getInputStream(next);
+                // 把输入流的文件传到输出流中 如果是word/document.xml由我们输入
+                zipout.putNextEntry(new ZipEntry(next.toString()));
+                if ("word/document.xml".equals(next.toString())) {
+                    InputStream in = new FileInputStream(file);
+                    while ((len = in.read(buffer)) != -1) {
+                        zipout.write(buffer, 0, len);
+                    }
+                    in.close();
+                } else {
+                    while ((len = is.read(buffer)) != -1) {
+                        zipout.write(buffer, 0, len);
+                    }
+                    is.close();
+                }
+            }
+            zipout.close();
+        }
     }
 
 }

@@ -5,6 +5,7 @@ import org.springframework.util.CollectionUtils;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Stream;
 
 public class MyUtils {
@@ -28,6 +29,32 @@ public class MyUtils {
         });
 
         return res;
+    }
+
+    public static String getWordIdStringRandom() {
+        return getStringRandom(8);
+    }
+
+    /**
+     * 生成随机数字和大写字母
+     * @param len 位数
+     * @return
+     */
+    public static String getStringRandom(int len) {
+        if (len <= 0) return null;
+
+        StringBuffer sb = new StringBuffer();
+
+        Random random = new Random();
+        Stream.iterate(0, i -> i + 1).limit(len).forEach(i -> {
+            if (random.nextBoolean()) { // true: 大写字母
+                sb.append((char) (random.nextInt(26)+65));
+            } else {
+                sb.append(random.nextInt(10));
+            }
+        });
+
+        return sb.toString();
     }
 
 }
