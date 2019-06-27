@@ -2,6 +2,8 @@ package tech.veedo.zhuzhu.templates;
 
 import tech.veedo.zhuzhu.entity.CandidateReport;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class DocumentTemplate {
 
     private static DocumentTemplate dt = DocumentTemplate.init();
@@ -12,6 +14,7 @@ public class DocumentTemplate {
     }
 
     public static String generateXMLStr(CandidateReport report) {
+        AtomicInteger count = new AtomicInteger(0);
         StringBuffer sb = new StringBuffer(xmlhead);
 //        sb.append(document1)
 //                .append(TitleTemplate.generateXmlStr(report.getTitle()))
@@ -27,13 +30,15 @@ public class DocumentTemplate {
 //                .append(RemarkTemplate.generateXmlStr(report.getRemarks()))
 //                .append(document999);
 
-        sb.append(documentOpen)
-                .append(bodyOpen)
+        sb.append(documentOpen);
+        sb.append(bodyOpen);
 
-                .append(RemarkTemplate.generateXmlStr(report.getRemarks()))
-                .append(tail)
-                .append(bodyClose)
-                .append(documentClose);
+        sb.append(WorkExperienceTemplate.generateXmlStr(report.getWorkExperiences(), count));
+        sb.append(ProjectExperienceTemplate.generateXmlStr(report.getProjectExperiences(), count));
+        sb.append(RemarkTemplate.generateXmlStr(report.getRemarks()));
+        sb.append(tail);
+        sb.append(bodyClose);
+        sb.append(documentClose);
         return sb.toString();
     }
 

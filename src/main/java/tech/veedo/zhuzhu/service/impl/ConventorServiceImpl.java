@@ -86,7 +86,7 @@ public class ConventorServiceImpl implements ConventorService {
                     .setStartProjDate("2020.02")
                     .setEndProjDate("2020.09")
                     .setProjectName("wooo")
-                    .setProjectPost("军团长")
+                    .setProjectPost("军团长1")
                     .setProjectContent("带兵打仗")
                     .setProjectDuty("不知道")
                     .setProjectPerformance("赢了");
@@ -95,7 +95,7 @@ public class ConventorServiceImpl implements ConventorService {
                     .setStartProjDate("2020.02")
                     .setEndProjDate("2020.09")
                     .setProjectName("wooo")
-                    .setProjectPost("军团长")
+                    .setProjectPost("军团长321")
                     .setProjectContent("带兵打仗")
                     .setProjectDuty("不知321道")
                     .setProjectPerformance("赢了");
@@ -135,8 +135,6 @@ public class ConventorServiceImpl implements ConventorService {
         // 1.获取xml，并根据获取的对象，生成临时xml
         {
             String doctmp = DocumentTemplate.generateXMLStr(report);
-
-            System.out.println(doctmp);
             Document doc = DocumentHelper.parseText(doctmp);
 
             OutputFormat of = new OutputFormat();

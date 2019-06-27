@@ -31,27 +31,27 @@ public class RemarkTemplate {
     }
 
     private static final String remarktitle =
-            "<w:p w14:paraId='#W#O#paraId#R#D#' w14:textId='77777777' w:rsidR='005137DB' w:rsidRPr='00996D23' w:rsidRDefault='00EB798E' w:rsidP='003F3477'>" +
-            "<w:pPr>" +
-            "<w:spacing w:line='360' w:lineRule='auto'/>" +
-            "</w:pPr>" +
-            "<w:commentRangeStart w:id='29'/>" +
-            "<w:r w:rsidRPr='003F3477'>" +
-            "<w:rPr>" +
-            "<w:rFonts w:ascii='宋体' w:hAnsi='宋体' w:hint='eastAsia'/>" +
-            "<w:b/>" +
-            "<w:szCs w:val='21'/>" +
-            "</w:rPr>" +
-            "<w:t>核心优势：</w:t>" +
-            "</w:r>" +
-            "<w:commentRangeEnd w:id='29'/>" +
-            "<w:r w:rsidR='00397C81'>" +
-            "<w:rPr>" +
-            "<w:rStyle w:val='af9'/>" +
-            "</w:rPr>" +
-            "<w:commentReference w:id='29'/>" +
-            "</w:r>" +
-            "</w:p>";
+            "    <w:p w14:paraId=\"#W#O#paraId#R#D#\" w14:textId=\"77777777\" w:rsidR=\"005137DB\" w:rsidRPr=\"00996D23\" w:rsidRDefault=\"00EB798E\" w:rsidP=\"003F3477\">\n" +
+                    "      <w:pPr>\n" +
+                    "        <w:spacing w:line=\"360\" w:lineRule=\"auto\"/>\n" +
+                    "      </w:pPr>\n" +
+                    "      <w:commentRangeStart w:id=\"1\"/>\n" +
+                    "      <w:r w:rsidRPr=\"003F3477\">\n" +
+                    "        <w:rPr>\n" +
+                    "          <w:rFonts w:ascii=\"宋体\" w:hAnsi=\"宋体\" w:hint=\"eastAsia\"/>\n" +
+                    "          <w:b/>\n" +
+                    "          <w:szCs w:val=\"21\"/>\n" +
+                    "        </w:rPr>\n" +
+                    "        <w:t>核心优势：</w:t>\n" +
+                    "      </w:r>\n" +
+                    "      <w:commentRangeEnd w:id=\"1\"/>\n" +
+                    "      <w:r w:rsidR=\"00397C81\">\n" +
+                    "        <w:rPr>\n" +
+                    "          <w:rStyle w:val=\"af9\"/>\n" +
+                    "        </w:rPr>\n" +
+                    "        <w:commentReference w:id=\"1\"/>\n" +
+                    "      </w:r>\n" +
+                    "    </w:p>";
     private static final String remark =
             "<w:p w14:paraId='#W#O#paraId#R#D#' w14:textId='77777777' w:rsidR='00A917E9' w:rsidRDefault='00B945FB' w:rsidP='00B945FB'>" +
             "<w:pPr>" +
@@ -78,12 +78,12 @@ public class RemarkTemplate {
             "</w:r>" +
             "</w:p>";
     private static final String enter =
-            "<w:p w14:paraId='#W#O#paraId#R#D#' w14:textId='77777777' w:rsidR='000452C0' w:rsidRPr='000452C0' w:rsidRDefault='000452C0' w:rsidP='000452C0'>" +
-                    "<w:pPr>" +
-                    "<w:rPr>" +
-                    "<w:rFonts w:ascii='宋体' w:hAnsi='宋体'/>" +
-                    "<w:sz w:val='22'/>" +
-                    "</w:rPr>" +
-                    "</w:pPr>" +
-                    "</w:p>";
+            "    <w:p w14:paraId=\"#W#O#paraId#R#D#\" w14:textId=\"77777777\" w:rsidR=\"000452C0\" w:rsidRPr=\"000452C0\" w:rsidRDefault=\"000452C0\" w:rsidP=\"000452C0\">\n" +
+                    "      <w:pPr>\n" +
+                    "        <w:rPr>\n" +
+                    "          <w:rFonts w:ascii=\"宋体\" w:hAnsi=\"宋体\"/>\n" +
+                    "          <w:sz w:val=\"22\"/>\n" +
+                    "        </w:rPr>\n" +
+                    "      </w:pPr>\n" +
+                    "    </w:p>";
 }

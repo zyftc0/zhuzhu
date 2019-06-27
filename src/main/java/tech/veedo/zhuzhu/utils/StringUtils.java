@@ -18,19 +18,19 @@ public class StringUtils {
         while (matcher.find()) {
             String var = matcher.group();
             String key = var.replace(prefix, "").replace(suffix, "");
-            text = text.replaceAll(var, params.get(key).toString());
+            text = text.replaceAll(var, params.get(key)==null?"":params.get(key).toString());
         }
 
         return text;
     }
 
-    public static String format(String text, String origin, String target) {
+    public static String format(String text, String origin, Object target) {
         Pattern pattern = Pattern.compile(prefix + origin + suffix);
         Matcher matcher = pattern.matcher(text);
 
         while (matcher.find()) {
             String var = matcher.group();
-            text = text.replaceAll(var, target);
+            text = text.replaceAll(var, String.valueOf(target));
         }
 
         return text;
