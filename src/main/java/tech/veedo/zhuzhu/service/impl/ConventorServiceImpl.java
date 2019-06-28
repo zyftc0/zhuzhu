@@ -1,22 +1,16 @@
 package tech.veedo.zhuzhu.service.impl;
 
-import freemarker.template.TemplateException;
-import org.dom4j.*;
-import org.dom4j.io.OutputFormat;
-import org.dom4j.io.XMLWriter;
+import org.docx4j.Docx4J;
+import org.docx4j.openpackaging.exceptions.Docx4JException;
+import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
+import org.docx4j.openpackaging.parts.WordprocessingML.MainDocumentPart;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ResourceUtils;
 import tech.veedo.zhuzhu.entity.*;
 import tech.veedo.zhuzhu.service.ConventorService;
-import tech.veedo.zhuzhu.templates.DocumentTemplate;
-import tech.veedo.zhuzhu.utils.MyUtils;
-
 import java.io.*;
 import java.util.*;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipFile;
-import java.util.zip.ZipOutputStream;
 
 @Service
 public class ConventorServiceImpl implements ConventorService {
@@ -24,7 +18,7 @@ public class ConventorServiceImpl implements ConventorService {
     @Value("${template.path}")
     private String templatePath;
 
-    public static void main(String[] args) throws IOException, TemplateException, DocumentException {
+    public static void main(String[] args) throws IOException, Docx4JException {
         CandidateReport report = new CandidateReport();
         {
             Title title = new Title()
@@ -131,27 +125,52 @@ public class ConventorServiceImpl implements ConventorService {
         String finalDocxName = "final"+System.currentTimeMillis()+".docx";
 
 
-
-        // 1.获取xml，并根据获取的对象，生成临时xml
         {
-            String doctmp = DocumentTemplate.generateXMLStr(report);
-            Document doc = DocumentHelper.parseText(doctmp);
+            // load the package
+            WordprocessingMLPackage wordMLPackage = Docx4J.load(ResourceUtils.getFile(oriTemplateDir+oriTemplateDocx));
+            MainDocumentPart document = wordMLPackage.getMainDocumentPart();
 
-            OutputFormat of = new OutputFormat();
-            of.setEncoding("UTF-8");
-            of.setNewlines(true);
-            of.setIndent(true);
-            of.setIndent("    ");
+            document.addParagraphOfText("asd");
 
-            XMLWriter writer = new XMLWriter(of);
 
-            File file = new File(tmpDir + tmpXml);
+
+
+            File file = new File(outDirPath + finalDocxName);
             if (!file.exists()) file.createNewFile();
-            writer.setOutputStream(new FileOutputStream(file));
-            writer.write(doc);
-            writer.flush();
-            writer.close();
+            wordMLPackage.save(file);
         }
+
+
+
+
+
+
+
+
+
+
+
+
+//        // 1.获取xml，并根据获取的对象，生成临时xml
+//        {
+//            String doctmp = DocumentTemplate.generateXMLStr(report);
+//            Document doc = DocumentHelper.parseText(doctmp);
+//
+//            OutputFormat of = new OutputFormat();
+//            of.setEncoding("UTF-8");
+//            of.setNewlines(true);
+//            of.setIndent(true);
+//            of.setIndent("    ");
+//
+//            XMLWriter writer = new XMLWriter(of);
+//
+//            File file = new File(tmpDir + tmpXml);
+//            if (!file.exists()) file.createNewFile();
+//            writer.setOutputStream(new FileOutputStream(file));
+//            writer.write(doc);
+//            writer.flush();
+//            writer.close();
+//        }
 
 //        {
 //            // 模板路径
@@ -173,37 +192,37 @@ public class ConventorServiceImpl implements ConventorService {
 //            out.close();
 //        }
 
-        {
-            // 临时xml文件
-            File file = new File(tmpDir + tmpXml);
-            // 获取docx原始模板文件
-            File oriDocx = ResourceUtils.getFile(oriTemplateDir + oriTemplateDocx);
-            ZipFile zipFile = new ZipFile(oriDocx);
-
-            Enumeration<? extends ZipEntry> zipEntrys = zipFile.entries();
-            ZipOutputStream zipout = new ZipOutputStream(new FileOutputStream(outDirPath + finalDocxName));
-            int len;
-            byte[] buffer = new byte[1024];
-            while (zipEntrys.hasMoreElements()) {
-                ZipEntry next = zipEntrys.nextElement();
-                InputStream is = zipFile.getInputStream(next);
-                // 把输入流的文件传到输出流中 如果是word/document.xml由我们输入
-                zipout.putNextEntry(new ZipEntry(next.toString()));
-                if ("word/document.xml".equals(next.toString())) {
-                    InputStream in = new FileInputStream(file);
-                    while ((len = in.read(buffer)) != -1) {
-                        zipout.write(buffer, 0, len);
-                    }
-                    in.close();
-                } else {
-                    while ((len = is.read(buffer)) != -1) {
-                        zipout.write(buffer, 0, len);
-                    }
-                    is.close();
-                }
-            }
-            zipout.close();
-        }
+//        {
+//            // 临时xml文件
+//            File file = new File(tmpDir + tmpXml);
+//            // 获取docx原始模板文件
+//            File oriDocx = ResourceUtils.getFile(oriTemplateDir + oriTemplateDocx);
+//            ZipFile zipFile = new ZipFile(oriDocx);
+//
+//            Enumeration<? extends ZipEntry> zipEntrys = zipFile.entries();
+//            ZipOutputStream zipout = new ZipOutputStream(new FileOutputStream(outDirPath + finalDocxName));
+//            int len;
+//            byte[] buffer = new byte[1024];
+//            while (zipEntrys.hasMoreElements()) {
+//                ZipEntry next = zipEntrys.nextElement();
+//                InputStream is = zipFile.getInputStream(next);
+//                // 把输入流的文件传到输出流中 如果是word/document.xml由我们输入
+//                zipout.putNextEntry(new ZipEntry(next.toString()));
+//                if ("word/document.xml".equals(next.toString())) {
+//                    InputStream in = new FileInputStream(file);
+//                    while ((len = in.read(buffer)) != -1) {
+//                        zipout.write(buffer, 0, len);
+//                    }
+//                    in.close();
+//                } else {
+//                    while ((len = is.read(buffer)) != -1) {
+//                        zipout.write(buffer, 0, len);
+//                    }
+//                    is.close();
+//                }
+//            }
+//            zipout.close();
+//        }
     }
 
 }
