@@ -1,5 +1,6 @@
 package tech.veedo.zhuzhu.service.impl;
 
+import org.docx4j.Docx4J;
 import org.docx4j.jaxb.Context;
 import org.docx4j.openpackaging.exceptions.Docx4JException;
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
@@ -7,16 +8,21 @@ import org.docx4j.openpackaging.parts.WordprocessingML.MainDocumentPart;
 import org.docx4j.wml.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ResourceUtils;
 import tech.veedo.zhuzhu.entity.*;
-import tech.veedo.zhuzhu.enums.ColorEnum;
-import tech.veedo.zhuzhu.enums.RFontsEnum;
+import tech.veedo.zhuzhu.parts.TitlePart;
 import tech.veedo.zhuzhu.service.ConventorService;
 import tech.veedo.zhuzhu.sets.ColorSet;
 import tech.veedo.zhuzhu.sets.RFontsSet;
 import tech.veedo.zhuzhu.utils.MyUtils;
 
+import javax.xml.bind.JAXBException;
 import java.io.*;
 import java.math.BigInteger;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @Service
@@ -25,7 +31,9 @@ public class ConventorServiceImpl implements ConventorService {
     @Value("${template.path}")
     private String templatePath;
 
-    public static void main(String[] args) throws IOException, Docx4JException {
+
+
+    public static void main(String[] args) throws IOException, Docx4JException, JAXBException {
         CandidateReport report = new CandidateReport();
         {
             Title title = new Title()
@@ -132,113 +140,21 @@ public class ConventorServiceImpl implements ConventorService {
         String finalDocxName = "final"+System.currentTimeMillis()+".docx";
 
         // create a new package
-        WordprocessingMLPackage wordMLPackage = WordprocessingMLPackage.createPackage();
-        // get the main part w:document
-        MainDocumentPart document = wordMLPackage.getMainDocumentPart();
-        // get the object factory
-        ObjectFactory factory = Context.getWmlObjectFactory();
+//        WordprocessingMLPackage wordMLPackage = WordprocessingMLPackage.createPackage();
+//        // get the main part w:document
+//        MainDocumentPart body = wordMLPackage.getMainDocumentPart();
+//
+//        List<P> titlePs = TitlePart.generate(report.getTitle());
+//        titlePs.forEach(p -> body.addObject(p));
 
-        // title
-        {
-            P p1 = factory.createP();
-            {
-                PPr ppr = factory.createPPr();
-                {
-                    PPrBase.PStyle pStyle= factory.createPPrBasePStyle();
-                    pStyle.setVal("a5");
-                    ppr.setPStyle(pStyle);
+        WordprocessingMLPackage wordMLPackage = Docx4J.load(ResourceUtils.getFile(oriTemplateDir + oriTemplateDocx));
+        MainDocumentPart body = wordMLPackage.getMainDocumentPart();
 
-                    ParaRPr rPr = factory.createParaRPr();
-                    {
-                        rPr.setRFonts(RFontsSet.getArial());
-                        rPr.setColor(ColorSet.getBlack());
-
-                        HpsMeasure sz = new HpsMeasure(){{ setVal(BigInteger.valueOf(21)); }};
-                        rPr.setSz(sz);
-                        rPr.setSzCs(sz);
-
-                        Jc jc = factory.createJc();
-                        jc.setVal(JcEnumeration.CENTER);
-                        ppr.setJc(jc);
-                    }
-                    ppr.setRPr(rPr);
-                }
-                p1.setPPr(ppr);
-
-                R r = factory.createR();
-                {
-//                    r.setRsidRPr(MyUtils.getWordIdStringRandom());
-                    RPr rPr = factory.createRPr();
-                    {
-                        rPr.setRFonts(RFontsSet.getArial());
-                        rPr.setColor(ColorSet.getBlack());
-
-                        HpsMeasure sz = new HpsMeasure(){{ setVal(BigInteger.valueOf(21)); }};
-                        rPr.setSz(sz);
-                        rPr.setSzCs(sz);
-
-                        rPr.setB(factory.createBooleanDefaultTrue());
-                    }
-                    r.setRPr(rPr);
-
-                    Text text = factory.createText();
-                    text.setValue("CANDIDATE REPORT");
-                    r.getContent().add(text);
-                }
-                p1.getContent().add(r);
-            }
-            document.getContent().add(p1);
-
-            P p2 = factory.createP();
-            {
-                PPr ppr = factory.createPPr();
-                {
-                    PPrBase.PStyle pStyle= factory.createPPrBasePStyle();
-                    pStyle.setVal("a5");
-                    ppr.setPStyle(pStyle);
-
-                    ParaRPr rPr = factory.createParaRPr();
-                    {
-                        rPr.setRFonts(RFontsSet.getSongTi());
-                        rPr.setColor(ColorSet.getBlack());
-
-                        HpsMeasure sz = new HpsMeasure(){{ setVal(BigInteger.valueOf(21)); }};
-                        rPr.setSz(sz);
-                        rPr.setSzCs(sz);
-
-                        Jc jc = factory.createJc();
-                        jc.setVal(JcEnumeration.CENTER);
-                        ppr.setJc(jc);
-                    }
-                    ppr.setRPr(rPr);
-                }
-                p2.setPPr(ppr);
-
-                R r = factory.createR();
-                {
-//                    r.setRsidRPr(MyUtils.getWordIdStringRandom());
-                    RPr rPr = factory.createRPr();
-                    {
-                        rPr.setRFonts(RFontsSet.getSongTi());
-                        rPr.setColor(ColorSet.getBlack());
-
-                        HpsMeasure sz = new HpsMeasure(){{ setVal(BigInteger.valueOf(21)); }};
-                        rPr.setSz(sz);
-                        rPr.setSzCs(sz);
-
-                        rPr.getB().setVal(true);
-                    }
-                    r.setRPr(rPr);
-
-                    Text text = factory.createText();
-                    text.setValue("Recommend Position:"+report.getTitle().getPost()+"-"+report.getTitle().getPostLocation());
-                    r.getContent().add(text);
-                }
-                p2.getContent().add(r);
-            }
-            document.getContent().add(p2);
-        }
-
+        HashMap<String, String> totalMap = new HashMap<>();
+        totalMap.putAll(MyUtils.Object2HashMap(report.getTitle()));
+        totalMap.putAll(MyUtils.Object2HashMap(report.getPersonalInformation()));
+        totalMap.putAll(MyUtils.Object2HashMap(report.getCompensation()));
+        body.variableReplace(totalMap);
 
 
 
