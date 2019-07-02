@@ -1,6 +1,9 @@
 package tech.veedo.zhuzhu.service.impl;
 
 import org.docx4j.Docx4J;
+import org.docx4j.TraversalUtil;
+import org.docx4j.XmlUtils;
+import org.docx4j.finders.ClassFinder;
 import org.docx4j.jaxb.Context;
 import org.docx4j.openpackaging.exceptions.Docx4JException;
 import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
@@ -24,6 +27,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class ConventorServiceImpl implements ConventorService {
@@ -149,6 +153,32 @@ public class ConventorServiceImpl implements ConventorService {
 
         WordprocessingMLPackage wordMLPackage = Docx4J.load(ResourceUtils.getFile(oriTemplateDir + oriTemplateDocx));
         MainDocumentPart body = wordMLPackage.getMainDocumentPart();
+
+        ClassFinder classFinder = new ClassFinder(P.class);
+        new TraversalUtil(body.getContent(), classFinder);
+        List<Object> results = classFinder.results;
+
+        {
+            Integer remarkIndex = results.size()-1;
+            P remarkP = (P) results.get(remarkIndex);
+
+            List<HashMap<String, String>> remarkMaps = report.getRemarks().stream()
+                    .map(remark -> MyUtils.Object2HashMap(remark))
+                    .collect(Collectors.toList());
+            String remarkStr = XmlUtils.marshaltoString(remarkP);
+
+            remarkMaps.forEach(map -> {
+                try {
+                    P newRemark = (P) XmlUtils.unmarshallFromTemplate(remarkStr, map);
+                    body.getContent().add(newRemark);
+                } catch (JAXBException e) {
+                    e.printStackTrace();
+                }
+            });
+
+            body.getContent().remove(remarkP);
+        }
+
 
         HashMap<String, String> totalMap = new HashMap<>();
         totalMap.putAll(MyUtils.Object2HashMap(report.getTitle()));
