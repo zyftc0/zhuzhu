@@ -28,6 +28,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class ConventorServiceImpl implements ConventorService {
@@ -139,8 +140,8 @@ public class ConventorServiceImpl implements ConventorService {
         String tmpDir = "C:/Users/50689/Desktop/IO/tmp/";
         String tmpXml = "document.xml";
         // 目标文件存放路径
-//        String outDirPath = "/Users/ifzhang/Downloads/";  // mac
-        String outDirPath = "C:/Users/50689/Desktop/IO/";  // windows
+        String outDirPath = "/Users/ifzhang/Downloads/";  // mac
+//        String outDirPath = "C:/Users/50689/Desktop/IO/";  // windows
         String finalDocxName = "final"+System.currentTimeMillis()+".docx";
 
         // create a new package
@@ -158,7 +159,9 @@ public class ConventorServiceImpl implements ConventorService {
         new TraversalUtil(body.getContent(), classFinder);
         List<Object> results = classFinder.results;
 
+
         {
+            // remark
             Integer remarkIndex = results.size()-1;
             P remarkP = (P) results.get(remarkIndex);
 
@@ -179,14 +182,51 @@ public class ConventorServiceImpl implements ConventorService {
             body.getContent().remove(remarkP);
         }
 
+        {
+            // project
+        }
 
-        HashMap<String, String> totalMap = new HashMap<>();
-        totalMap.putAll(MyUtils.Object2HashMap(report.getTitle()));
-        totalMap.putAll(MyUtils.Object2HashMap(report.getPersonalInformation()));
-        totalMap.putAll(MyUtils.Object2HashMap(report.getCompensation()));
-        body.variableReplace(totalMap);
+        {
+            // work
+        }
 
+        {
+            // edu
+            Integer[] eduIndexs = {13};
 
+            StringBuffer sb = new StringBuffer();
+            Arrays.stream(eduIndexs).forEach(i -> {
+                P p = (P) results.get(i);
+                sb.append(XmlUtils.marshaltoString(p));
+                body.getContent().remove(p);
+            });
+
+            String eduStr = sb.toString();
+
+            List<HashMap<String, String>> eduMaps = report.getEducationBackgrounds().stream()
+                    .map(educationBackground -> MyUtils.Object2HashMap(educationBackground))
+                    .collect(Collectors.toList());
+
+            Stream.iterate(0, i -> i+1).limit(eduMaps.size()).forEach(i -> {
+                HashMap<String, String> map = eduMaps.get(i);
+                try {
+                    P newEdu = (P) XmlUtils.unmarshallFromTemplate(eduStr, map);
+                    body.getContent().add(eduIndexs[0]+i, newEdu);
+                } catch (JAXBException e) {
+                    e.printStackTrace();
+                }
+            });
+
+        }
+
+        {
+            // title personalInfomation compensation
+            HashMap<String, String> totalMap = new HashMap<>();
+            totalMap.putAll(MyUtils.Object2HashMap(report.getTitle()));
+            totalMap.putAll(MyUtils.Object2HashMap(report.getPersonalInformation()));
+            totalMap.putAll(MyUtils.Object2HashMap(report.getCompensation()));
+            body.variableReplace(totalMap);
+        }
 
         {
             File file = new File(outDirPath + finalDocxName);
