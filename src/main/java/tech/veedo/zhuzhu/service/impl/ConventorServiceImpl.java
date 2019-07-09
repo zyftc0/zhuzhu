@@ -140,8 +140,8 @@ public class ConventorServiceImpl implements ConventorService {
         String tmpDir = "C:/Users/50689/Desktop/IO/tmp/";
         String tmpXml = "document.xml";
         // 目标文件存放路径
-        String outDirPath = "/Users/ifzhang/Downloads/";  // mac
-//        String outDirPath = "C:/Users/50689/Desktop/IO/";  // windows
+//        String outDirPath = "/Users/ifzhang/Downloads/";  // mac
+        String outDirPath = "C:/Users/50689/Desktop/IO/";  // windows
         String finalDocxName = "final"+System.currentTimeMillis()+".docx";
 
         // create a new package
@@ -184,24 +184,41 @@ public class ConventorServiceImpl implements ConventorService {
 
         {
             // project
-        }
-
-        {
-            // work
-        }
-
-        {
-            // edu
-            Integer[] eduIndexs = {13};
-
+            Integer[] proIndexs = {25, 26, 27, 28, 29};
             StringBuffer sb = new StringBuffer();
-            Arrays.stream(eduIndexs).forEach(i -> {
+            Arrays.stream(proIndexs).forEach(i -> {
                 P p = (P) results.get(i);
                 sb.append(XmlUtils.marshaltoString(p));
                 body.getContent().remove(p);
             });
 
-            String eduStr = sb.toString();
+            String proStr = generateStr(body, results, proIndexs);
+
+            List<HashMap<String, String>> proMaps = report.getProjectExperiences().stream()
+                    .map(projectExperience -> MyUtils.Object2HashMap(projectExperience))
+                    .collect(Collectors.toList());
+
+            Stream.iterate(0, i -> i+1).limit(proMaps.size()).forEach(i -> {
+                HashMap<String, String> map = proMaps.get(i);
+                try {
+                    P newPro = (P) XmlUtils.unmarshallFromTemplate(proStr, map);
+                    System.out.println(XmlUtils.marshaltoString(newPro));
+//                    body.getContent().add(proIndexs[0]+i, newPro);
+                } catch (JAXBException e) {
+                    e.printStackTrace();
+                }
+            });
+        }
+
+        {
+            // work
+            Integer[] workIndexs = {16, 17, 18, 19, 21, 22};
+        }
+
+        {
+            // edu
+            Integer[] eduIndexs = {13};
+            String eduStr = generateStr(body, results, eduIndexs);
 
             List<HashMap<String, String>> eduMaps = report.getEducationBackgrounds().stream()
                     .map(educationBackground -> MyUtils.Object2HashMap(educationBackground))
@@ -312,6 +329,18 @@ public class ConventorServiceImpl implements ConventorService {
 //            }
 //            zipout.close();
 //        }
+    }
+
+    private static String generateStr(MainDocumentPart body, List<Object> results, Integer[] indexs) {
+        StringBuffer sb = new StringBuffer();
+
+        Arrays.stream(indexs).forEach(i -> {
+            P p = (P) results.get(i);
+            sb.append(XmlUtils.marshaltoString(p));
+            body.getContent().remove(p);
+        });
+
+        return sb.toString();
     }
 
 }
