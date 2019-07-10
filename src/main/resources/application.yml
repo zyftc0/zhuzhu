@@ -1,5 +1,9 @@
 server:
   port: 9629
 
-template:
-#  path: /templates/document.xml
+veedo:
+  ragdoll:
+    global-advice:
+      enabled: true
+    exception-advice:
+      enabled: true

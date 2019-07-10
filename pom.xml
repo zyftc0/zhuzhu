@@ -47,6 +47,12 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>tech.veedo.plugins</groupId>
+            <artifactId>ragdoll-global-advice</artifactId>
+            <version>1.0.0.RELEASE</version>
+        </dependency>
+
 <!--        &lt;!&ndash; https://mvnrepository.com/artifact/commons-codec/commons-codec &ndash;&gt;-->
 <!--        <dependency>-->
 <!--            <groupId>commons-codec</groupId>-->
