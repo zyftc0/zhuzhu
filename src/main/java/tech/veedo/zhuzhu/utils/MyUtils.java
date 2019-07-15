@@ -74,4 +74,14 @@ public class MyUtils {
         return sb.toString();
     }
 
+    public static String getOutDirPath() {
+        switch (System.getProperty ("os.name")) {
+            case "Windows 10":
+                return "C:/Users/50689/Desktop/IO/";
+            case "Mac OS X":
+                return "/Users/ifzhang/Downloads/";
+            default:
+                return "/data/";
+        }
+    }
 }

@@ -1,5 +1,6 @@
 package tech.veedo.zhuzhu.service.impl;
 
+import com.sun.xml.internal.messaging.saaj.packaging.mime.internet.MimeUtility;
 import lombok.extern.slf4j.Slf4j;
 import org.docx4j.Docx4J;
 import org.docx4j.TraversalUtil;
@@ -16,8 +17,10 @@ import tech.veedo.zhuzhu.entity.*;
 import tech.veedo.zhuzhu.service.ConventorService;
 import tech.veedo.zhuzhu.utils.MyUtils;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.xml.bind.JAXBException;
 import java.io.*;
+import java.net.URLEncoder;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -126,109 +129,12 @@ public class ConventorServiceImpl implements ConventorService {
         return report;
     }
 
-    private static DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM");
-
-    public static void main(String[] args) throws IOException, Docx4JException, JAXBException {
-        CandidateReport report = new CandidateReport();
-        {
-            report.setCompany("德玛西亚");
-            Title title = new Title()
-                    .setPost("八十万禁军教头")
-                    .setPostLocation("汴梁");
-            PersonalInformation pi = new PersonalInformation()
-                    .setName("盖伦20190626")
-                    .setGender(0)
-                    .setBirthyear("1993")
-                    .setHomeAddress("德玛西亚")
-                    .setMaritalStatus(1);
-            Compensation compensation = new Compensation()
-                    .setCompensation("234W");
-
-            List<EducationBackground> educationBackgrounds = new ArrayList<>();
-            EducationBackground e1 = new EducationBackground()
-                    .setStartEduDate("2018.01")
-                    .setEndEduDate("2018.10")
-                    .setSchool("东北林业大学")
-                    .setMajor("软件工程")
-                    .setEducation("学士");
-            EducationBackground e2 = new EducationBackground()
-                    .setStartEduDate("2019.01")
-                    .setEndEduDate("2019.06")
-                    .setSchool("东北打麻将大学2")
-                    .setMajor("软件a 程")
-                    .setEducation("学 3 士");
-            educationBackgrounds.add(e1);
-            educationBackgrounds.add(e2);
-
-            List<WorkExperience> workExperiences = new ArrayList<>();
-            WorkExperience w1 = new WorkExperience()
-                    .setStartJobDate("2020.01")
-                    .setEndJobDate("2020.10")
-                    .setCompanyName("zhongtiejian")
-                    .setCompanyPost("总裁")
-                    .setCompanyInfomation("this is chaofhnahjioejfio ada ")
-                    .setLeader("董事长")
-                    .setSubordinateCount("19")
-                    .setJobContent("我二姨不知道干啥")
-                    .setPerformance("你谬比就完事了")
-                    .setReason("不想干了");
-            workExperiences.add(w1);
-            WorkExperience w2 = new WorkExperience()
-                    .setStartJobDate("2020.01")
-                    .setEndJobDate("2020.10")
-                    .setCompanyName("zhongtiejian")
-                    .setCompanyPost("总裁")
-                    .setCompanyInfomation("this is chaofhnahjioejfio ada ")
-                    .setLeader("董事长")
-                    .setSubordinateCount("19")
-                    .setJobContent("我二姨不知道干啥")
-                    .setPerformance("你谬比123就完事了")
-                    .setReason("不想干了");
-            workExperiences.add(w2);
-
-            List<ProjectExperience> projectExperiences = new ArrayList<>();
-            ProjectExperience p1 = new ProjectExperience()
-                    .setStartProjDate("2020.02")
-                    .setEndProjDate("2020.09")
-                    .setProjectName("wooo")
-                    .setProjectPost("军团长1")
-                    .setProjectContent("带兵打仗")
-                    .setProjectDuty("不知道")
-                    .setProjectPerformance("赢了");
-            projectExperiences.add(p1);
-            ProjectExperience p2 = new ProjectExperience()
-                    .setStartProjDate("2020.02")
-                    .setEndProjDate("2020.09")
-                    .setProjectName("wooo")
-                    .setProjectPost("军团长321")
-                    .setProjectContent("带兵打仗")
-                    .setProjectDuty("不知321道")
-                    .setProjectPerformance("赢了");
-            projectExperiences.add(p2);
-
-            List<Remark> remarks = new ArrayList<>();
-            Remark r1 = new Remark()
-                    .setRemark("啊啊");
-            remarks.add(r1);
-            Remark r2 = new Remark()
-                    .setRemark("我是沐浴着党的阳光，在党的教育下成长起来的。在成长的历程中，我的父母家人对我的世界观、人生观和价值观的树立，起到了非常重要的作用，在我很小的时候，他们就带着我观看革命影片，给我讲述革命先烈的英雄事迹，让红色的种子从小就在我的心中生根发芽，让党的光辉形象伴随");
-            remarks.add(r2);
-
-            report.setTitle(title)
-                    .setPersonalInformation(pi)
-                    .setCompensation(compensation)
-                    .setEducationBackgrounds(educationBackgrounds)
-                    .setWorkExperiences(workExperiences)
-                    .setProjectExperiences(projectExperiences)
-                    .setRemarks(remarks);
-        }
-
+    @Override
+    public void generateReport(HttpServletResponse response, CandidateReport report) throws IOException, Docx4JException, JAXBException {
         // 原始模板文件路径：
         String oriTemplateDir = "classpath:templates/";
         String oriTemplateDocx = "document.docx";
-        // 目标文件存放路径
-//        String outDirPath = "/Users/ifzhang/Downloads/";  // mac
-        String outDirPath = "C:/Users/50689/Desktop/IO/";  // windows
+
         String finalDocxName = report.getPersonalInformation().getName()
                 +"-"
                 +report.getCompany()
@@ -308,14 +214,30 @@ public class ConventorServiceImpl implements ConventorService {
             body.variableReplace(totalMap);
         }
 
+        // save
         {
-            File file = new File(outDirPath + finalDocxName);
+            File file = new File(MyUtils.getOutDirPath() + finalDocxName);
             if (!file.exists()) file.createNewFile();
             wordMLPackage.save(file);
         }
 
+        // download
+        {
+            OutputStream os = response.getOutputStream();//获取输出流
+            response.reset();
+            response.setContentType("multipart/form-data");
+            response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(finalDocxName, "UTF-8"));
+            response.setHeader("Access-Control-Expose-Headers", URLEncoder.encode(finalDocxName, "UTF-8"));
+            response.setCharacterEncoding("utf-8");
 
+            wordMLPackage.save(os);
+
+            os.flush();
+            os.close();
+        }
     }
+
+    private static DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM");
 
     private static void generateListPart(MainDocumentPart body, List<Object> results, Integer[] indexs, List<HashMap<String, String>> maps, boolean enter) {
         if (CollectionUtils.isEmpty(maps)) {
