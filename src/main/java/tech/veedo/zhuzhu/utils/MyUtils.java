@@ -21,13 +21,13 @@ public class MyUtils {
             BeanMap beanMap = BeanMap.create(o);
             beanMap.keySet().forEach(k -> {
                 if (beanMap.get(k) != null) {
-                    if (k.toString().equals("gender")) {
-                        res.put(k.toString(), GenderEnum.getGenderStr((Integer) beanMap.get(k)));
-                    } else if (k.toString().equals("maritalStatus")) {
-                        res.put(k.toString(), MaritalStatusEnum.getMaritalStatusStr((Integer) beanMap.get(k)));
-                    } else {
+//                    if (k.toString().equals("gender")) {
+//                        res.put(k.toString(), GenderEnum.getGenderStr((Integer) beanMap.get(k)));
+//                    } else if (k.toString().equals("maritalStatus")) {
+//                        res.put(k.toString(), MaritalStatusEnum.getMaritalStatusStr((Integer) beanMap.get(k)));
+//                    } else {
                         res.put(k.toString(), beanMap.get(k).toString());
-                    }
+//                    }
                 } else {
                     res.put(k.toString(), "");
                 }

@@ -11,8 +11,6 @@ public class CandidateReport {
 
     private Long id;
 
-    private String company;
-
     /**
      * 标题
      */

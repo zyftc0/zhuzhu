@@ -9,6 +9,8 @@ public class Title {
 
     private Long id;
 
+    private String company;
+
     private String post;
 
     private String postLocation;

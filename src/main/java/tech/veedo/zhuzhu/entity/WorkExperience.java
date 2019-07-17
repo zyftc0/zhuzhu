@@ -17,7 +17,7 @@ public class WorkExperience {
 
     private String companyPost;
 
-    private String companyInfomation;
+    private String companyInformation;
 
     private String leader;
 

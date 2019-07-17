@@ -14,12 +14,12 @@ public class PersonalInformation {
 
     private String name;
 
-    private Integer gender;
+    private String gender;
 
     private String birthyear;
 
     private String homeAddress;
 
-    private Integer maritalStatus;
+    private String maritalStatus;
 
 }

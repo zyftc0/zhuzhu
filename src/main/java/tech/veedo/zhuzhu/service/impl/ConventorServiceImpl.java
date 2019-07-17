@@ -1,6 +1,5 @@
 package tech.veedo.zhuzhu.service.impl;
 
-import com.sun.xml.internal.messaging.saaj.packaging.mime.internet.MimeUtility;
 import lombok.extern.slf4j.Slf4j;
 import org.docx4j.Docx4J;
 import org.docx4j.TraversalUtil;
@@ -35,16 +34,16 @@ public class ConventorServiceImpl implements ConventorService {
     public CandidateReport getDataFormat() {
         CandidateReport report = new CandidateReport();
         {
-            report.setCompany("德玛西亚");
             Title title = new Title()
+                    .setCompany("德玛西亚")
                     .setPost("八十万禁军教头")
                     .setPostLocation("汴梁");
             PersonalInformation pi = new PersonalInformation()
                     .setName("盖伦20190626")
-                    .setGender(0)
+                    .setGender("shi")
                     .setBirthyear("1993")
                     .setHomeAddress("德玛西亚")
-                    .setMaritalStatus(1);
+                    .setMaritalStatus("shi");
             Compensation compensation = new Compensation()
                     .setCompensation("234W");
 
@@ -70,7 +69,7 @@ public class ConventorServiceImpl implements ConventorService {
                     .setEndJobDate("2020.10")
                     .setCompanyName("zhongtiejian")
                     .setCompanyPost("总裁")
-                    .setCompanyInfomation("this is chaofhnahjioejfio ada ")
+                    .setCompanyInformation("this is chaofhnahjioejfio ada ")
                     .setLeader("董事长")
                     .setSubordinateCount("19")
                     .setJobContent("我二姨不知道干啥")
@@ -82,7 +81,7 @@ public class ConventorServiceImpl implements ConventorService {
                     .setEndJobDate("2020.10")
                     .setCompanyName("zhongtiejian")
                     .setCompanyPost("总裁")
-                    .setCompanyInfomation("this is chaofhnahjioejfio ada ")
+                    .setCompanyInformation("this is chaofhnahjioejfio ada ")
                     .setLeader("董事长")
                     .setSubordinateCount("19")
                     .setJobContent("我二姨不知道干啥")
@@ -137,7 +136,7 @@ public class ConventorServiceImpl implements ConventorService {
 
         String finalDocxName = report.getPersonalInformation().getName()
                 +"-"
-                +report.getCompany()
+                +report.getTitle().getCompany()
                 +"-"
                 +report.getTitle().getPost()
                 +"-"
@@ -216,9 +215,9 @@ public class ConventorServiceImpl implements ConventorService {
 
         // save
         {
-            File file = new File(MyUtils.getOutDirPath() + finalDocxName);
-            if (!file.exists()) file.createNewFile();
-            wordMLPackage.save(file);
+//            File file = new File(MyUtils.getOutDirPath() + finalDocxName);
+//            if (!file.exists()) file.createNewFile();
+//            wordMLPackage.save(file);
         }
 
         // download
