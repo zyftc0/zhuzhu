@@ -2,10 +2,7 @@ package tech.veedo.zhuzhu.utils;
 
 import org.springframework.cglib.beans.BeanMap;
 import org.springframework.util.CollectionUtils;
-import tech.veedo.zhuzhu.enums.GenderEnum;
-import tech.veedo.zhuzhu.enums.MaritalStatusEnum;
 
-import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
@@ -13,7 +10,7 @@ import java.util.stream.Stream;
 
 public class MyUtils {
 
-    private static DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM");
+//    private static DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM");
 
     public static HashMap<String, String> Object2HashMap(Object o) {
         HashMap<String, String> res = new HashMap<>();
@@ -21,13 +18,15 @@ public class MyUtils {
             BeanMap beanMap = BeanMap.create(o);
             beanMap.keySet().forEach(k -> {
                 if (beanMap.get(k) != null) {
-//                    if (k.toString().equals("gender")) {
-//                        res.put(k.toString(), GenderEnum.getGenderStr((Integer) beanMap.get(k)));
-//                    } else if (k.toString().equals("maritalStatus")) {
-//                        res.put(k.toString(), MaritalStatusEnum.getMaritalStatusStr((Integer) beanMap.get(k)));
-//                    } else {
+                    if (k.toString().equals("endJobDate") || k.toString().equals("endProjDate")) {
+                        if ("9999.12".equals(beanMap.get(k).toString())) {
+                            res.put(k.toString(), "至今");
+                        } else {
+                            res.put(k.toString(), beanMap.get(k).toString());
+                        }
+                    } else {
                         res.put(k.toString(), beanMap.get(k).toString());
-//                    }
+                    }
                 } else {
                     res.put(k.toString(), "");
                 }
@@ -81,7 +80,7 @@ public class MyUtils {
             case "Mac OS X":
                 return "/Users/ifzhang/Downloads/";
             default:
-                return "/data/";
+                return "/root/word/";
         }
     }
 }

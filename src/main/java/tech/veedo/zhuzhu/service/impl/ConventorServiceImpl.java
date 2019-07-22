@@ -131,7 +131,6 @@ public class ConventorServiceImpl implements ConventorService {
     @Override
     public void generateReport(HttpServletResponse response, CandidateReport report) throws IOException, Docx4JException, JAXBException {
         // 原始模板文件路径：
-        String oriTemplateDir = "classpath:templates/";
         String oriTemplateDocx = "document.docx";
 
         String finalDocxName = report.getPersonalInformation().getName()
@@ -147,7 +146,7 @@ public class ConventorServiceImpl implements ConventorService {
                 +format.format(LocalDate.now())
                 +".docx";
 
-        WordprocessingMLPackage wordMLPackage = Docx4J.load(ResourceUtils.getFile(oriTemplateDir + oriTemplateDocx));
+        WordprocessingMLPackage wordMLPackage = Docx4J.load(ResourceUtils.getFile(MyUtils.getOutDirPath() + oriTemplateDocx));
         MainDocumentPart body = wordMLPackage.getMainDocumentPart();
 
         ClassFinder classFinder = new ClassFinder(P.class);
@@ -185,7 +184,7 @@ public class ConventorServiceImpl implements ConventorService {
 
         // work
         {
-            Integer[] workIndexs = {16, 17, 18, 19, 21, 22};
+            Integer[] workIndexs = {16, 17, 18, 19, 20, 21, 22};
 
             List<HashMap<String, String>> workMaps = report.getWorkExperiences().stream()
                     .map(workExperience -> MyUtils.Object2HashMap(workExperience))
@@ -227,6 +226,7 @@ public class ConventorServiceImpl implements ConventorService {
             response.setContentType("multipart/form-data");
             response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(finalDocxName, "UTF-8"));
             response.setHeader("Access-Control-Expose-Headers", URLEncoder.encode(finalDocxName, "UTF-8"));
+            response.setHeader("FileName",  URLEncoder.encode(finalDocxName, "UTF-8"));
             response.setCharacterEncoding("utf-8");
 
             wordMLPackage.save(os);
